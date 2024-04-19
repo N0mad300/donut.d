@@ -1,9 +1,10 @@
-module donut;
+//Unix System Version
+
+module donut.unix;
 
 import std.stdio;
 import std.string;
 import core.stdc.stdlib;
-import core.stdc.config;
 import std.math;
 
 void main()
@@ -11,18 +12,7 @@ void main()
     double A = 0, B = 0;
     double[] z = new double[1760];
     char[] b = new char[1760];
-    version (Windows)
-    {
-        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-        CONSOLE_CURSOR_INFO cursorInfo;
-        cursorInfo.dwSize = 100;
-        cursorInfo.bVisible = FALSE;
-        SetConsoleCursorInfo(hConsole, &cursorInfo);
-    }
-    else
-    {
-        printf("\x1b[2J");
-    }
+    printf("\x1b[2J");
     for (;;)
     {
         b[] = cast(char) 32;
@@ -51,14 +41,7 @@ void main()
                     }
                 }
             }
-        version (Windows)
-        {
-            system("cls");
-        }
-        else
-        {
-            printf("\x1b[H");
-        }
+        printf("\x1b[H");
         for (int k = 0; 1760 > k; k++)
             if (k % 80 != 0)
                 putchar(b[k]);
