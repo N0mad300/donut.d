@@ -7,9 +7,11 @@ import std.string;
 import core.stdc.stdlib;
 import std.math;
 
+int k;
+
 void main()
 {
-    double A = 0, B = 0;
+    double A = 0, B = 0, i, j;
     double[] z = new double[1760];
     char[] b = new char[1760];
     printf("\x1b[2J");
@@ -17,32 +19,27 @@ void main()
     {
         b[] = cast(char) 32;
         z[] = cast(double) 0;
-        for (double j = 0; 6.28 > j; j += 0.07)
-            for (double i = 0; 6.28 > i; i += 0.02)
+        for (j = 0; 6.28 > j; j += 0.07)
+            for (i = 0; 6.28 > i; i += 0.02)
             {
                 double c = sin(i), d = cos(j), e = sin(A), f = sin(j), g = cos(A), h = d + 2,
                 D = 1 / (c * h * e + f * g + 5), l = cos(i), m = cos(B), n = sin(B),
                 t = c * h * g - f * e;
                 int x = cast(int)(40 + 30 * D * (l * h * m - t * n));
-                if (x >= 0 && x < 80) // Check if x is within bounds
-                {
-                    int y = cast(int)(12 + 15 * D * (l * h * n + t * m));
-                    if (y >= 0 && y < 22) // Check if y is within bounds
-                    {
-                        int o = x + 80 * y;
-                        int N = cast(int)(8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n));
+                int y = cast(int)(12 + 15 * D * (l * h * n + t * m));
+                int o = x + 80 * y;
+                int N = cast(int)(8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n));
 
-                        int stringIndex = N > 0 ? N : 0;
-                        if (stringIndex >= 0 && stringIndex < ".-~:;=!*#$@".length)
-                        {
-                            z[o] = D;
-                            b[o] = ".-~:;=!*#$@"[stringIndex];
-                        }
-                    }
+                int stringIndex = N > 0 ? N : 0;
+                if (22 > y && y > 0 && x > 0 && 80 > x && D > z[o] && stringIndex >= 0 && stringIndex < ".-~:;=!*#$@"
+                    .length)
+                {
+                    z[o] = D;
+                    b[o] = ".-~:;=!*#$@"[stringIndex];
                 }
             }
         printf("\x1b[H");
-        for (int k = 0; 1760 > k; k++)
+        for (k = 0; 1761 > k; k++)
             if (k % 80 != 0)
                 putchar(b[k]);
             else
